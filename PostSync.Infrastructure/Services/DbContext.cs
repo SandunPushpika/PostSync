@@ -27,14 +27,14 @@ public class DbContext : IDbContext
 
     public async Task<T> GetAsync<T>(string query, object data)
     {
-        var result = await _connection.QuerySingleAsync<T>(query, data);
+        var result = _connection.QueryAsync<T>(query, data).Result.FirstOrDefault();
 
         return result;
     }
 
     public async Task<int> ExecuteQueryAsync(string query, object data)
     {
-        var result = await _connection.QuerySingleAsync<int>(query, data);
+        var result = _connection.QueryAsync<int>(query, data).Result.FirstOrDefault();
 
         return result;
     }
