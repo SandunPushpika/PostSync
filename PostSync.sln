@@ -18,6 +18,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Integration.Core", "Integra
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Integration.Infrastructure", "Integration.Infrastructure\Integration.Infrastructure.csproj", "{73B73665-19BB-46BE-900A-1FE9B6501436}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shared", "Shared\Shared.csproj", "{0D5C6C54-D78F-4A2A-8416-D32CCF17CB1E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -48,6 +50,10 @@ Global
 		{73B73665-19BB-46BE-900A-1FE9B6501436}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{73B73665-19BB-46BE-900A-1FE9B6501436}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{73B73665-19BB-46BE-900A-1FE9B6501436}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0D5C6C54-D78F-4A2A-8416-D32CCF17CB1E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0D5C6C54-D78F-4A2A-8416-D32CCF17CB1E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0D5C6C54-D78F-4A2A-8416-D32CCF17CB1E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0D5C6C54-D78F-4A2A-8416-D32CCF17CB1E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{F1991B75-2CA3-4133-B832-59D28D39C476} = {2E7B0267-3491-4EFC-B54F-937351624132}

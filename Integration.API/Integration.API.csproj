@@ -11,8 +11,16 @@
       <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.1" />
       <PackageReference Include="BCrypt" Version="1.0.0" />
       <PackageReference Include="Dapper" Version="2.0.151" />
+      <PackageReference Include="Flurl" Version="4.0.0-pre4" />
+      <PackageReference Include="MassTransit.RabbitMQ" Version="8.1.2-develop.1572" />
       <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.22" />
       <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="7.0.0" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\Integration.Core\Integration.Core.csproj" />
+      <ProjectReference Include="..\Integration.Infrastructure\Integration.Infrastructure.csproj" />
+      <ProjectReference Include="..\Shared\Shared.csproj" />
     </ItemGroup>
 
 </Project>

@@ -1,3 +1,4 @@
+using MassTransit;
 using Microsoft.Extensions.Options;
 using PostSync.API.Extensions;
 using PostSync.API.Middlewears;
@@ -18,6 +19,9 @@ builder.Services.AddServices();
 
 builder.Services.AddCustomAuthentication(appConfig);
 
+builder.Services.AddMassTransitConfigs(appConfig.RabbitMq.Host, appConfig.RabbitMq.Username,
+    appConfig.RabbitMq.Password);
+
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
 var app = builder.Build();
@@ -25,6 +29,13 @@ var app = builder.Build();
 app.UseHttpsRedirection();
 
 app.MapControllers();
+
+app.UseCors(builder =>
+{
+    builder.AllowAnyOrigin()
+        .AllowAnyMethod()
+        .AllowAnyHeader();
+});
 
 app.UseAuthentication();
 

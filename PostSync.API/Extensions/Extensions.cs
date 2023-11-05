@@ -1,4 +1,6 @@
 using System.Text;
+using Integration.Core.Domains.DTOs;
+using MassTransit;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
@@ -40,4 +42,40 @@ public static class Extensions
                 };
             });
     }
+
+    public static IServiceCollection AddCustomCorsPolicy(this IServiceCollection collection)
+    {
+        collection.AddCors(options =>
+        {
+            options.AddDefaultPolicy(builder =>
+            {
+                builder.WithOrigins("http://localhost:3000")
+                    .AllowAnyMethod()
+                    .AllowAnyMethod();
+            });
+        });
+
+        return collection;
+    }
+
+    public static IServiceCollection AddMassTransitConfigs(this IServiceCollection collection, string host, string username, string password)
+    {
+        collection.AddMassTransit(conf =>
+        {
+            conf.UsingRabbitMq((ctx, cfg) =>
+            {
+                cfg.Host(host,"/", config =>
+                {
+                    config.Username(username);
+                    config.Password(password);
+                });
+                
+                cfg.Message<UserModel>(m => m.SetEntityName("UserModel"));
+                
+            });
+        });
+
+        return collection;
+    }
+    
 }
