@@ -2,10 +2,11 @@ using System.Net;
 using System.Net.Http.Headers;
 using System.Text;
 using System.Text.Json;
+using PostSync.Core.Services;
 
 namespace PostSync.Infrastructure.Services;
 
-public class HttpClientHelper
+public class HttpClientHelper : IHttpClientHelper
 {
     private readonly HttpClient _client;
 

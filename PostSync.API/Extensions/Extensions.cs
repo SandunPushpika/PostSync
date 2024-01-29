@@ -5,7 +5,9 @@ using Microsoft.IdentityModel.Tokens;
 using PostSync.Core.Helpers.Configs;
 using PostSync.Core.Interfaces;
 using PostSync.Core.Services;
+using PostSync.Core.Services.Integrations;
 using PostSync.Infrastructure.Services;
+using PostSync.Infrastructure.Services.Integrations;
 
 namespace PostSync.API.Extensions;
 
@@ -18,7 +20,9 @@ public static class Extensions
         collection.AddScoped<IDbContext, DbContext>();
         collection.AddScoped<IUserService, UserService>();
         collection.AddScoped<IAuthService, AuthService>();
-
+        collection.AddScoped<IHttpClientHelper, HttpClientHelper>();
+        collection.AddScoped<IFacebookService, FacebookService>();
+        
         return collection;
     }
 
