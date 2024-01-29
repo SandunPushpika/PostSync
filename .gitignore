@@ -1,0 +1,10 @@
+bin
+obj
+packages
+.idea
+PostSync.API/bin
+PostSync.API/obj
+PostSync.Core/bin
+PostSync.Core/obj
+PostSync.Infrastructure/bin
+PostSync.Infrastructure/obj
