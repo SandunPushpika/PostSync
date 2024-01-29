@@ -1,0 +1,15 @@
+/media/aizenit/D/Personal Projects/PostSync-Backend/PostSync/PostSync.Infrastructure/bin/Debug/net8.0/PostSync.Infrastructure.deps.json
+/media/aizenit/D/Personal Projects/PostSync-Backend/PostSync/PostSync.Infrastructure/bin/Debug/net8.0/PostSync.Infrastructure.dll
+/media/aizenit/D/Personal Projects/PostSync-Backend/PostSync/PostSync.Infrastructure/bin/Debug/net8.0/PostSync.Infrastructure.pdb
+/media/aizenit/D/Personal Projects/PostSync-Backend/PostSync/PostSync.Infrastructure/bin/Debug/net8.0/PostSync.Core.dll
+/media/aizenit/D/Personal Projects/PostSync-Backend/PostSync/PostSync.Infrastructure/bin/Debug/net8.0/PostSync.Core.pdb
+/media/aizenit/D/Personal Projects/PostSync-Backend/PostSync/PostSync.Infrastructure/obj/Debug/net8.0/PostSync.Infrastructure.csproj.AssemblyReference.cache
+/media/aizenit/D/Personal Projects/PostSync-Backend/PostSync/PostSync.Infrastructure/obj/Debug/net8.0/PostSync.Infrastructure.GeneratedMSBuildEditorConfig.editorconfig
+/media/aizenit/D/Personal Projects/PostSync-Backend/PostSync/PostSync.Infrastructure/obj/Debug/net8.0/PostSync.Infrastructure.AssemblyInfoInputs.cache
+/media/aizenit/D/Personal Projects/PostSync-Backend/PostSync/PostSync.Infrastructure/obj/Debug/net8.0/PostSync.Infrastructure.AssemblyInfo.cs
+/media/aizenit/D/Personal Projects/PostSync-Backend/PostSync/PostSync.Infrastructure/obj/Debug/net8.0/PostSync.Infrastructure.csproj.CoreCompileInputs.cache
+/media/aizenit/D/Personal Projects/PostSync-Backend/PostSync/PostSync.Infrastructure/obj/Debug/net8.0/PostSync.Infrastructure.csproj.CopyComplete
+/media/aizenit/D/Personal Projects/PostSync-Backend/PostSync/PostSync.Infrastructure/obj/Debug/net8.0/PostSync.Infrastructure.dll
+/media/aizenit/D/Personal Projects/PostSync-Backend/PostSync/PostSync.Infrastructure/obj/Debug/net8.0/refint/PostSync.Infrastructure.dll
+/media/aizenit/D/Personal Projects/PostSync-Backend/PostSync/PostSync.Infrastructure/obj/Debug/net8.0/PostSync.Infrastructure.pdb
+/media/aizenit/D/Personal Projects/PostSync-Backend/PostSync/PostSync.Infrastructure/obj/Debug/net8.0/ref/PostSync.Infrastructure.dll

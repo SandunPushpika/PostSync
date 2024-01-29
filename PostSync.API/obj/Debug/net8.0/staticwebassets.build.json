@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "a57h8JRYJ77KtrgMPAROuMtla5wMzZvp/gydVQPfX8s=",
+  "Source": "PostSync.API",
+  "BasePath": "_content/PostSync.API",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}

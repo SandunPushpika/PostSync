@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PostSync.API", "PostSync.API\PostSync.API.csproj", "{0E3A9033-D23A-497B-9B31-48DBED4708D7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PostSync.Core", "PostSync.Core\PostSync.Core.csproj", "{F3ED4DB4-599C-407A-BF00-454F22AA07DD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PostSync.Infrastructure", "PostSync.Infrastructure\PostSync.Infrastructure.csproj", "{030527C3-3881-4A83-89C5-C83817F5BE03}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0E3A9033-D23A-497B-9B31-48DBED4708D7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0E3A9033-D23A-497B-9B31-48DBED4708D7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0E3A9033-D23A-497B-9B31-48DBED4708D7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0E3A9033-D23A-497B-9B31-48DBED4708D7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F3ED4DB4-599C-407A-BF00-454F22AA07DD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F3ED4DB4-599C-407A-BF00-454F22AA07DD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F3ED4DB4-599C-407A-BF00-454F22AA07DD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F3ED4DB4-599C-407A-BF00-454F22AA07DD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{030527C3-3881-4A83-89C5-C83817F5BE03}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{030527C3-3881-4A83-89C5-C83817F5BE03}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{030527C3-3881-4A83-89C5-C83817F5BE03}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{030527C3-3881-4A83-89C5-C83817F5BE03}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal

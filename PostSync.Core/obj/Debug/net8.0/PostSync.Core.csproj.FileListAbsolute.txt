@@ -1,0 +1,12 @@
+/media/aizenit/D/Personal Projects/PostSync-Backend/PostSync/PostSync.Core/bin/Debug/net8.0/PostSync.Core.deps.json
+/media/aizenit/D/Personal Projects/PostSync-Backend/PostSync/PostSync.Core/bin/Debug/net8.0/PostSync.Core.dll
+/media/aizenit/D/Personal Projects/PostSync-Backend/PostSync/PostSync.Core/bin/Debug/net8.0/PostSync.Core.pdb
+/media/aizenit/D/Personal Projects/PostSync-Backend/PostSync/PostSync.Core/obj/Debug/net8.0/PostSync.Core.csproj.AssemblyReference.cache
+/media/aizenit/D/Personal Projects/PostSync-Backend/PostSync/PostSync.Core/obj/Debug/net8.0/PostSync.Core.GeneratedMSBuildEditorConfig.editorconfig
+/media/aizenit/D/Personal Projects/PostSync-Backend/PostSync/PostSync.Core/obj/Debug/net8.0/PostSync.Core.AssemblyInfoInputs.cache
+/media/aizenit/D/Personal Projects/PostSync-Backend/PostSync/PostSync.Core/obj/Debug/net8.0/PostSync.Core.AssemblyInfo.cs
+/media/aizenit/D/Personal Projects/PostSync-Backend/PostSync/PostSync.Core/obj/Debug/net8.0/PostSync.Core.csproj.CoreCompileInputs.cache
+/media/aizenit/D/Personal Projects/PostSync-Backend/PostSync/PostSync.Core/obj/Debug/net8.0/PostSync.Core.dll
+/media/aizenit/D/Personal Projects/PostSync-Backend/PostSync/PostSync.Core/obj/Debug/net8.0/refint/PostSync.Core.dll
+/media/aizenit/D/Personal Projects/PostSync-Backend/PostSync/PostSync.Core/obj/Debug/net8.0/PostSync.Core.pdb
+/media/aizenit/D/Personal Projects/PostSync-Backend/PostSync/PostSync.Core/obj/Debug/net8.0/ref/PostSync.Core.dll
