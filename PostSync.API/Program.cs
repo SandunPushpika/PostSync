@@ -1,9 +1,11 @@
+using Dapper;
 using Microsoft.Extensions.Options;
 using PostSync.API.Extensions;
 using PostSync.API.Middlewears;
 using PostSync.Core.Helpers.Configs;
 
 var builder = WebApplication.CreateBuilder(args);
+DefaultTypeMap.MatchNamesWithUnderscores = true;
 
 var provider = builder.Services.BuildServiceProvider();
 var configuration = provider.GetService<IConfiguration>();

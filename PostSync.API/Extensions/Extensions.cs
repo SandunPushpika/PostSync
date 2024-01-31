@@ -22,6 +22,9 @@ public static class Extensions
         collection.AddScoped<IAuthService, AuthService>();
         collection.AddScoped<IHttpClientHelper, HttpClientHelper>();
         collection.AddScoped<IFacebookService, FacebookService>();
+        collection.AddScoped<IHttpContextService, HttpContextService>();
+        collection.AddScoped<IIntegrationService, IntegrationService>();
+        collection.AddHttpContextAccessor();
         
         return collection;
     }

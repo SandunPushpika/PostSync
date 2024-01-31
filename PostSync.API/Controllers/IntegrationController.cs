@@ -1,8 +1,11 @@
 using System.Net;
 using Microsoft.AspNetCore.Mvc;
 using PostSync.Core.DTOs.Responses;
+using PostSync.Core.Models;
+using PostSync.Core.Services;
 using PostSync.Core.Services.Integrations;
 using PostSync.Infrastructure.Services;
+using PostSync.Infrastructure.Services.Integrations;
 
 namespace PostSync.API.Controllers;
 
@@ -12,11 +15,16 @@ public class IntegrationController : Controller
 {
     private readonly IFacebookService _facebookService;
     private readonly ResponseService _response;
+    private readonly IHttpContextService _context;
+    private readonly IIntegrationService _integrationService;
 
-    public IntegrationController(IFacebookService facebookService, ResponseService response)
+    public IntegrationController(IFacebookService facebookService, ResponseService response,
+        IHttpContextService context, IIntegrationService integrationService)
     {
         _facebookService = facebookService;
         _response = response;
+        _context = context;
+        _integrationService = integrationService;
     }
 
     [HttpGet("url/{platform}")]
@@ -30,6 +38,14 @@ public class IntegrationController : Controller
         }
 
         return _response.ReplyResponse(new HttpPostSyncResponse("Invalid Platform",false,(int)HttpStatusCode.BadRequest));
+    }
+    
+    [HttpGet]
+    public async Task<IActionResult> GetIntegrations()
+    {
+        var userId = (int)await _context.GetUserId();
+        var res = await _integrationService.GetIntegrations(userId);
+        return _response.ReplyResponse(res);
     }
     
     [HttpGet("authenticate/{platform}")]

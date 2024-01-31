@@ -110,26 +110,10 @@ public class AuthService : IAuthService
 
     public async Task<TokenResponse> RefreshToken(string token)
     {
-        var tokenHandler = new JwtSecurityTokenHandler();
-        
-        var jwtToken = await tokenHandler.ValidateTokenAsync(token, new TokenValidationParameters()
-        {
-            RequireExpirationTime = true,
-            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_appConfig.Jwt.Key)),
-            ValidIssuer = _appConfig.Jwt.Issuer,
-            ValidAudience = _appConfig.Jwt.Audience,
-            ValidateIssuer = true,
-            ValidateAudience = true,
-            ValidateLifetime = true,
-            ValidateIssuerSigningKey = true
-        });
+        var jwtToken = await GetValidatedToken(token);
 
-        if (!jwtToken.IsValid)
-        {
-            _responseService.StatusCode = HttpStatusCode.Unauthorized;
-            _responseService.Message = "Invalid Token!";
+        if (jwtToken == null)
             return null;
-        }
         
         var usernameClaim = jwtToken.ClaimsIdentity.Claims.ToList().FirstOrDefault(claim => claim.Type == "username");
         if (usernameClaim == null)
@@ -157,5 +141,47 @@ public class AuthService : IAuthService
             AccessToken = accessToken,
             RefreshToken = refreshToken
         };
+    }
+
+    public async Task<int?> GetUserId(string token)
+    {
+        var jwtToken = await GetValidatedToken(token);
+        if (jwtToken == null)
+            return null;
+
+        var userIdClaim = jwtToken.ClaimsIdentity.Claims.FirstOrDefault(claim => claim.Type == "userId");
+        if (userIdClaim == null)
+            return null;
+
+        return int.Parse(userIdClaim.Value);
+    }
+
+    private async Task<TokenValidationResult> GetValidatedToken(string token)
+    {
+        if (token == null)
+            return null;
+        
+        var tokenHandler = new JwtSecurityTokenHandler();
+        
+        var jwtToken = await tokenHandler.ValidateTokenAsync(token, new TokenValidationParameters()
+        {
+            RequireExpirationTime = true,
+            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_appConfig.Jwt.Key)),
+            ValidIssuer = _appConfig.Jwt.Issuer,
+            ValidAudience = _appConfig.Jwt.Audience,
+            ValidateIssuer = true,
+            ValidateAudience = true,
+            ValidateLifetime = true,
+            ValidateIssuerSigningKey = true
+        });
+
+        if (!jwtToken.IsValid)
+        {
+            _responseService.StatusCode = HttpStatusCode.Unauthorized;
+            _responseService.Message = "Invalid Token!";
+            return null;
+        }
+
+        return jwtToken;
     }
 }
