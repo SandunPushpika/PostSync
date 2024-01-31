@@ -1,14 +1,14 @@
 using System.Net;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using PostSync.Core.DTOs.Responses;
-using PostSync.Core.Models;
 using PostSync.Core.Services;
 using PostSync.Core.Services.Integrations;
 using PostSync.Infrastructure.Services;
-using PostSync.Infrastructure.Services.Integrations;
 
 namespace PostSync.API.Controllers;
 
+[Authorize]
 [ApiController]
 [Route("api/v1/[controller]")]
 public class IntegrationController : Controller
