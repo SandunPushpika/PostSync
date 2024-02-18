@@ -19,9 +19,11 @@ public class FacebookService : IFacebookService
     private readonly ResponseService _responseService;
     private readonly IMapper _mapper;
     private readonly IIntegrationService _integrationService;
+    private readonly IPageSessionService _pageSessionService;
     
     public FacebookService(IOptions<AppConfig> options, 
-        IHttpClientHelper helper, IHttpContextService context, ResponseService responseService, IMapper mapper, IIntegrationService integrationService)
+        IHttpClientHelper helper, IHttpContextService context, ResponseService responseService, 
+        IMapper mapper, IIntegrationService integrationService, IPageSessionService pageSessionService)
     {
         _configs = options.Value;
         _helper = helper;
@@ -29,6 +31,7 @@ public class FacebookService : IFacebookService
         _responseService = responseService;
         _mapper = mapper;
         _integrationService = integrationService;
+        _pageSessionService = pageSessionService;
     }
     
     public async Task<string> GetOAuthUrl()
@@ -55,15 +58,17 @@ public class FacebookService : IFacebookService
         var res = await _helper.Get<IntegrationTokens>(tokenUrl);
         if (res?.AccessToken == null)
             return null;
-
+        
+        var userId = (int) await _context.GetUserId();
         var sessionModel = _mapper.Map<IntegrationSessionModel>(res);
-        sessionModel.UserId = (int) await _context.GetUserId();
+        sessionModel.UserId = userId;
 
         var email = await GetEmail(res.AccessToken);
         sessionModel.Email = email;
 
         var prevSession = await _integrationService.GetIntegration(sessionModel.UserId, Platform.FACEBOOK, email);
-
+        var prevSessionId = prevSession.Id;
+        
         if (prevSession != null)
         {
             var updated = await _integrationService.UpdateIntegrationSession(sessionModel, prevSession.Id);
@@ -71,18 +76,59 @@ public class FacebookService : IFacebookService
             {
                 _responseService.StatusCode = HttpStatusCode.BadRequest;
                 _responseService.Message = "Error adding integration!";
+                return null;
             }
+        }
+        else
+        {
+            var result = await _integrationService.AddIntegrationSession(sessionModel);
+            if (result == 0)
+            {
+                _responseService.StatusCode = HttpStatusCode.BadRequest;
+                _responseService.Message = "Error adding integration!";
+                return null;
+            }
+
+            prevSessionId = result;
+        }
+
+        var tokens = await GetPageTokens(res.AccessToken);
+        tokens.Data.ForEach(t =>
+        {
+            var r = AddPageToken(t, userId, prevSessionId).Result;
+        });
+        
+        return res;
+    }
+
+    private async Task<bool> AddPageToken(FbPageToken token, int userId, int userSession)
+    {
+        var result = await _pageSessionService.GetPageSessionByPageId(userId, token.Id);
+        if (result != null)
+        {
+            var res = await _pageSessionService.UpdatePageSession(result.Id, token.AccessToken);
             return res;
         }
         
-        var result = await _integrationService.AddIntegrationSession(sessionModel);
-        if (!result)
+        var response = await _pageSessionService.AddPageSession(new PageSessionModel()
         {
-            _responseService.StatusCode = HttpStatusCode.BadRequest;
-            _responseService.Message = "Error adding integration!";
-        }
+            AccessToken = token.AccessToken,
+            UserId = userId,
+            Name = token.Name,
+            PageId = token.Id,
+            UserSession = userSession
+        });
+
+        return response;
+    }
+
+    public async Task<FacebookPageTokens> GetPageTokens(string accessToken)
+    {
+        var url = OAuthUrls.FacebookGraph + "me/accounts"
+            .AppendQueryParam("access_token", accessToken);
+        var result = await _helper.Get<FacebookPageTokens>(url);
         
-        return res;
+        return result;
     }
 
     public Task<IntegrationTokens> RefreshTokens<T>(T token)

@@ -8,11 +8,11 @@ namespace PostSync.Infrastructure.Services.Integrations;
 public class IntegrationService(IDbContext dbContext) : IIntegrationService
 {
 
-    public async Task<bool> AddIntegrationSession(IntegrationSessionModel model)
+    public async Task<int> AddIntegrationSession(IntegrationSessionModel model)
     {
         var res = await dbContext.ExecuteAsync(IntegrationQueries.INSERT_SESSION, model);
 
-        return res != 0;
+        return res;
     }
 
     public async Task<bool> UpdateIntegrationSession(IntegrationSessionModel model, int id)

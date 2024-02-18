@@ -46,6 +46,19 @@ public class AuthController : Controller
 
         return _responseService.ReplyResponse(res);
     }
+
+    [HttpGet("validate")]
+    public async Task<IActionResult> ValidateAccessToken(string accessToken)
+    {
+        await _authService.CheckValidation(accessToken);
+
+        return _responseService.ReplyResponse(new HttpPostSyncResponse()
+        {
+            Message = "Token valid",
+            StatusCode = 200,
+            Success = true
+        });
+    }
     
     
 }

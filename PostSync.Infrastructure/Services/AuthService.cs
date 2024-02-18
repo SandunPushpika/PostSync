@@ -110,7 +110,7 @@ public class AuthService : IAuthService
 
     public async Task<TokenResponse> RefreshToken(string token)
     {
-        var jwtToken = await GetValidatedToken(token);
+        var jwtToken = await GetValidatedTokenAsync(token);
 
         if (jwtToken == null)
             return null;
@@ -145,7 +145,7 @@ public class AuthService : IAuthService
 
     public async Task<int?> GetUserId(string token)
     {
-        var jwtToken = await GetValidatedToken(token);
+        var jwtToken = await GetValidatedTokenAsync(token);
         if (jwtToken == null)
             return null;
 
@@ -156,7 +156,7 @@ public class AuthService : IAuthService
         return int.Parse(userIdClaim.Value);
     }
 
-    private async Task<TokenValidationResult> GetValidatedToken(string token)
+    private async Task<TokenValidationResult> GetValidatedTokenAsync(string token)
     {
         if (token == null)
             return null;
@@ -183,5 +183,10 @@ public class AuthService : IAuthService
         }
 
         return jwtToken;
+    }
+
+    public async Task CheckValidation(string token)
+    {
+        await GetValidatedTokenAsync(token);
     }
 }

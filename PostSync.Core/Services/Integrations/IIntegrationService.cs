@@ -4,7 +4,7 @@ namespace PostSync.Core.Services.Integrations;
 
 public interface IIntegrationService
 {
-   Task<bool> AddIntegrationSession(IntegrationSessionModel model);
+   Task<int> AddIntegrationSession(IntegrationSessionModel model);
    Task<bool> UpdateIntegrationSession(IntegrationSessionModel model, int id);
    Task<bool> DeleteIntegrationSession(int id);
    Task<List<IntegrationSessionModel>> GetIntegrations(int userId);

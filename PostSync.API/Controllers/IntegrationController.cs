@@ -61,4 +61,11 @@ public class IntegrationController : Controller
         return _response.ReplyResponse(new HttpPostSyncResponse("Invalid Platform",false,(int)HttpStatusCode.BadRequest));
     }
     
+    [HttpGet("pagetokens")]
+    public async Task<IActionResult> GetPageTokens([FromQuery] string accessToken)
+    {
+        var res = await _facebookService.GetPageTokens(accessToken);
+        return _response.ReplyResponse(res);
+    }
+    
 }
