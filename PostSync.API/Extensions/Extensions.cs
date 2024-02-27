@@ -2,6 +2,7 @@ using System.Text;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
+using Microsoft.OpenApi.Models;
 using PostSync.Core.Helpers.Configs;
 using PostSync.Core.Interfaces;
 using PostSync.Core.Services;
@@ -20,7 +21,7 @@ public static class Extensions
         collection.AddScoped<IUserService, UserService>();
         collection.AddScoped<IAuthService, AuthService>();
         collection.AddScoped<IHttpClientHelper, HttpClientHelper>();
-        collection.AddScoped<IFacebookService, FacebookService>();
+        collection.AddScoped<IFbOauthService, FbOauthService>();
         collection.AddScoped<IHttpContextService, HttpContextService>();
         collection.AddScoped<IIntegrationService, IntegrationService>();
         collection.AddScoped<IPageSessionService, PageSessionService>();
@@ -57,6 +58,39 @@ public static class Extensions
                 builder.WithOrigins("http://localhost:3000")
                     .AllowAnyMethod()
                     .AllowAnyMethod();
+            });
+        });
+
+        return collection;
+    }
+
+    public static IServiceCollection AddSwaggerOptions(this IServiceCollection collection)
+    {
+        collection.AddSwaggerGen(options =>
+        {
+            options.AddSecurityDefinition("Bearer",new OpenApiSecurityScheme()
+            {
+                In = ParameterLocation.Header,
+                Name = "JWT Token",
+                Description = "Enter the token",
+                Scheme = "Bearer",
+                Type = SecuritySchemeType.Http
+        
+            });
+    
+            options.AddSecurityRequirement(new OpenApiSecurityRequirement()
+            {
+                {
+                    new OpenApiSecurityScheme
+                    {
+                        Reference = new OpenApiReference
+                        {
+                            Type=ReferenceType.SecurityScheme,
+                            Id="Bearer"
+                        }
+                    },
+                    new string[]{}
+                }
             });
         });
 

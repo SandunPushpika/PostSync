@@ -5,7 +5,7 @@ using PostSync.Infrastructure.Queries;
 
 namespace PostSync.Infrastructure.Services.Integrations;
 
-public class IntegrationService(IDbContext dbContext) : IIntegrationService
+public class IntegrationService(IDbContext dbContext, IPageSessionService pageSessionService) : IIntegrationService
 {
 
     public async Task<int> AddIntegrationSession(IntegrationSessionModel model)
@@ -47,6 +47,12 @@ public class IntegrationService(IDbContext dbContext) : IIntegrationService
             UserId = userId,
             Platform = platform
         });
+        return res;
+    }
+
+    public async Task<List<PageSessionModel>> GetConnectedPages(int userId)
+    {
+        var res = await pageSessionService.GetPageSessionModels(userId);
         return res;
     }
 }

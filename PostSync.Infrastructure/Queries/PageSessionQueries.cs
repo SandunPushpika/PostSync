@@ -8,6 +8,8 @@ public class PageSessionQueries
     public static string UPDATE_SESSION =
         "UPDATE page_sessions SET access_token=@AccessToken WHERE id=@Id";
 
-    public static string GET_SESSION = "SELECT * FROM page_sessions WHERE user_id=@userId";
+    public static string GET_SESSION = "SELECT ps.*, s.platform FROM page_sessions ps INNER JOIN  sessions s ON s.id = ps.user_session WHERE ps.user_id=@userId";
     public static string GET_SESSION_BY_PAGE = "SELECT * FROM page_sessions WHERE user_id=@userId AND page_id=@pageId";
+    public static string GET_SESSION_BY_PLATFORM =
+        "select ps.*, s.platform from page_sessions ps inner join  sessions s on s.id = ps.user_session where s.platform=@platform and ps.user_id=@userId";
 }

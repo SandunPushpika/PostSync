@@ -16,6 +16,8 @@ var appConfig = builder.Services.BuildServiceProvider().GetService<IOptions<AppC
 
 builder.Services.AddControllers();
 
+builder.Services.AddSwaggerOptions();
+
 builder.Services.AddServices();
 
 builder.Services.AddCustomAuthentication(appConfig);
@@ -23,6 +25,13 @@ builder.Services.AddCustomAuthentication(appConfig);
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
 var app = builder.Build();
+
+if (app.Environment.IsDevelopment())
+{
+    app.UseSwagger();
+    app.UseSwaggerUI();
+}
+
 
 app.UseHttpsRedirection();
 

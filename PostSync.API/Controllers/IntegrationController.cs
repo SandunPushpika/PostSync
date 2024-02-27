@@ -13,15 +13,15 @@ namespace PostSync.API.Controllers;
 [Route("api/v1/[controller]")]
 public class IntegrationController : Controller
 {
-    private readonly IFacebookService _facebookService;
+    private readonly IFbOauthService _fbOauthService;
     private readonly ResponseService _response;
     private readonly IHttpContextService _context;
     private readonly IIntegrationService _integrationService;
 
-    public IntegrationController(IFacebookService facebookService, ResponseService response,
+    public IntegrationController(IFbOauthService fbOauthService, ResponseService response,
         IHttpContextService context, IIntegrationService integrationService)
     {
-        _facebookService = facebookService;
+        _fbOauthService = fbOauthService;
         _response = response;
         _context = context;
         _integrationService = integrationService;
@@ -33,7 +33,7 @@ public class IntegrationController : Controller
         switch (platform)
         {
             case "facebook":case "Facebook":
-                var res = await _facebookService.GetOAuthUrl();
+                var res = await _fbOauthService.GetOAuthUrl();
                 return _response.ReplyResponse(res);
         }
 
@@ -44,7 +44,7 @@ public class IntegrationController : Controller
     public async Task<IActionResult> GetIntegrations()
     {
         var userId = (int)await _context.GetUserId();
-        var res = await _integrationService.GetIntegrations(userId);
+        var res = await _integrationService.GetConnectedPages(userId);
         return _response.ReplyResponse(res);
     }
     
@@ -54,7 +54,7 @@ public class IntegrationController : Controller
         switch (platform)
         {
             case "facebook":case "Facebook":
-                var res = await _facebookService.GetTokens(code);
+                var res = await _fbOauthService.GetTokens(code);
                 return _response.ReplyResponse(res);
         }
 
@@ -64,7 +64,7 @@ public class IntegrationController : Controller
     [HttpGet("pagetokens")]
     public async Task<IActionResult> GetPageTokens([FromQuery] string accessToken)
     {
-        var res = await _facebookService.GetPageTokens(accessToken);
+        var res = await _fbOauthService.GetPageTokens(accessToken);
         return _response.ReplyResponse(res);
     }
     

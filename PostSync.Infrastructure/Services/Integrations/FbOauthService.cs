@@ -11,7 +11,7 @@ using PostSync.Core.Services.Integrations;
 
 namespace PostSync.Infrastructure.Services.Integrations;
 
-public class FacebookService : IFacebookService
+public class FbOauthService : IFbOauthService
 {
     private readonly AppConfig _configs;
     private readonly IHttpClientHelper _helper;
@@ -21,7 +21,7 @@ public class FacebookService : IFacebookService
     private readonly IIntegrationService _integrationService;
     private readonly IPageSessionService _pageSessionService;
     
-    public FacebookService(IOptions<AppConfig> options, 
+    public FbOauthService(IOptions<AppConfig> options, 
         IHttpClientHelper helper, IHttpContextService context, ResponseService responseService, 
         IMapper mapper, IIntegrationService integrationService, IPageSessionService pageSessionService)
     {

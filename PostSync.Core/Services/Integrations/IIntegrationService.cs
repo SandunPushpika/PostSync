@@ -10,4 +10,5 @@ public interface IIntegrationService
    Task<List<IntegrationSessionModel>> GetIntegrations(int userId);
    Task<IntegrationSessionModel> GetIntegrationById(int userId, int id);
    Task<IntegrationSessionModel> GetIntegration(int userId, Platform platform,string email);
+   Task<List<PageSessionModel>> GetConnectedPages(int userId);
 }
