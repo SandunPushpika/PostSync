@@ -2,6 +2,7 @@ using Dapper;
 using Microsoft.Extensions.Options;
 using PostSync.API.Extensions;
 using PostSync.API.Middlewears;
+using PostSync.Configurations;
 using PostSync.Core.Helpers.Configs;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -23,6 +24,8 @@ builder.Services.AddServices();
 builder.Services.AddCustomAuthentication(appConfig);
 
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+
+SqlMappers.MapObjects();
 
 var app = builder.Build();
 

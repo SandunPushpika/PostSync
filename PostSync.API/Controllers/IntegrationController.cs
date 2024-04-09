@@ -35,6 +35,9 @@ public class IntegrationController : Controller
             case "facebook":case "Facebook":
                 var res = await _fbOauthService.GetOAuthUrl();
                 return _response.ReplyResponse(res);
+            case "all":case "All":case "ALL":
+                var fburl = await _fbOauthService.GetOAuthUrl();
+                return _response.ReplyResponse(new { facebook = fburl, instagram = "", linkedin = "" });
         }
 
         return _response.ReplyResponse(new HttpPostSyncResponse("Invalid Platform",false,(int)HttpStatusCode.BadRequest));
@@ -59,13 +62,6 @@ public class IntegrationController : Controller
         }
 
         return _response.ReplyResponse(new HttpPostSyncResponse("Invalid Platform",false,(int)HttpStatusCode.BadRequest));
-    }
-    
-    [HttpGet("pagetokens")]
-    public async Task<IActionResult> GetPageTokens([FromQuery] string accessToken)
-    {
-        var res = await _fbOauthService.GetPageTokens(accessToken);
-        return _response.ReplyResponse(res);
     }
     
 }

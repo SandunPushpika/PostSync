@@ -16,7 +16,6 @@ public static class Extensions
 {
     public static IServiceCollection AddServices(this IServiceCollection collection)
     {
-        collection.AddScoped<ResponseService>();
         collection.AddScoped<IDbContext, DbContext>();
         collection.AddScoped<IUserService, UserService>();
         collection.AddScoped<IAuthService, AuthService>();
@@ -25,6 +24,8 @@ public static class Extensions
         collection.AddScoped<IHttpContextService, HttpContextService>();
         collection.AddScoped<IIntegrationService, IntegrationService>();
         collection.AddScoped<IPageSessionService, PageSessionService>();
+        collection.AddScoped<IPostDbService, PostDbService>();
+        collection.AddScoped<ResponseService>();
         collection.AddHttpContextAccessor();
         
         return collection;
