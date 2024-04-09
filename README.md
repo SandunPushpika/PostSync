@@ -1,4 +1,4 @@
-# Project Name: Post Scheduling Backend
+# Project Name: PostSync
 
 ## Overview:
 This project is a backend system developed using .NET Core 8 and PostgreSQL, aimed at facilitating post scheduling and distribution across various platforms. The system allows users to schedule posts and send them to different platforms including Facebook, Instagram, WhatsApp, and LinkedIn.
