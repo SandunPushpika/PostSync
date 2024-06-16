@@ -105,12 +105,21 @@ public static class Extensions
 
         collection.AddQuartz(q =>
         {
+            q.SchedulerId = "qtSched";
+            q.SchedulerName = "PostSync Scheduler Config";
+            
             q.UsePersistentStore(c =>
             {
-                c.UsePostgres(databaseConnection);
+                c.UsePostgres(con =>
+                {
+                    con.ConnectionString = databaseConnection;
+                    con.TablePrefix = "QRTZ_";
+                });
+                c.UseJsonSerializer();
+                c.UseProperties = true;
             });
             
-            var jobKey = new JobKey("test");
+            var jobKey = new JobKey("test2");
             q.AddJob<TestHello>(jobKey);
             
             q.AddTrigger(opt => opt.ForJob(jobKey)

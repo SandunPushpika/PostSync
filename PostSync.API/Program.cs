@@ -29,14 +29,6 @@ builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
 builder.Services.AddQuartzConfig(appConfig.ConnectionStrings.Postgres);
 
-builder.Services.Configure<QuartzOptions>(configuration.GetSection("Quartz"));
-
-builder.Services.Configure<QuartzOptions>(options =>
-{
-    options.Scheduling.IgnoreDuplicates = true;
-    options.Scheduling.OverWriteExistingData = true;
-});
-
 SqlMappers.MapObjects();
 
 var app = builder.Build();
