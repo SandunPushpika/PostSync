@@ -8,7 +8,9 @@ using PostSync.Core.Interfaces;
 using PostSync.Core.Services;
 using PostSync.Core.Services.Integrations;
 using PostSync.Infrastructure.Services;
+using PostSync.Infrastructure.Services.BackgroundJobs;
 using PostSync.Infrastructure.Services.Integrations;
+using Quartz;
 
 namespace PostSync.API.Extensions;
 
@@ -95,6 +97,30 @@ public static class Extensions
             });
         });
 
+        return collection;
+    }
+
+    public static IServiceCollection AddQuartzConfig(this IServiceCollection collection, string databaseConnection)
+    {
+
+        collection.AddQuartz(q =>
+        {
+            q.UsePersistentStore(c =>
+            {
+                c.UsePostgres(databaseConnection);
+            });
+            
+            var jobKey = new JobKey("test");
+            q.AddJob<TestHello>(jobKey);
+            
+            q.AddTrigger(opt => opt.ForJob(jobKey)
+                .WithIdentity("HelloWorldJob-trigger")
+                .WithCronSchedule("0/5 * * * * ?"));
+            
+        });
+
+        collection.AddQuartzHostedService( q => q.WaitForJobsToComplete = true);
+        
         return collection;
     }
     

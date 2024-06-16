@@ -10,6 +10,7 @@ public class AppConfig
 public class Connections
 {
     public string Postgres { get; set; }
+    public string Hangfire { get; set; }
 }
 
 public class JwtDetails

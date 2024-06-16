@@ -1,9 +1,11 @@
+using System.Configuration;
 using Dapper;
 using Microsoft.Extensions.Options;
 using PostSync.API.Extensions;
 using PostSync.API.Middlewears;
 using PostSync.Configurations;
 using PostSync.Core.Helpers.Configs;
+using Quartz;
 
 var builder = WebApplication.CreateBuilder(args);
 DefaultTypeMap.MatchNamesWithUnderscores = true;
@@ -24,6 +26,16 @@ builder.Services.AddServices();
 builder.Services.AddCustomAuthentication(appConfig);
 
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+
+builder.Services.AddQuartzConfig(appConfig.ConnectionStrings.Postgres);
+
+builder.Services.Configure<QuartzOptions>(configuration.GetSection("Quartz"));
+
+builder.Services.Configure<QuartzOptions>(options =>
+{
+    options.Scheduling.IgnoreDuplicates = true;
+    options.Scheduling.OverWriteExistingData = true;
+});
 
 SqlMappers.MapObjects();
 

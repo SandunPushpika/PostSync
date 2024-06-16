@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using PostSync.Core.DTOs.Requests;
 using PostSync.Core.DTOs.Responses;
@@ -6,6 +7,7 @@ using PostSync.Infrastructure.Services;
 
 namespace PostSync.API.Controllers;
 
+[Authorize]
 [ApiController]
 [Route("api/v1/[controller]")]
 public class PostController : Controller
